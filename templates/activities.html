@@ -1,0 +1,14 @@
+{% extends 'base.html' %}  {# Dieses Template erbt von base.html #}
+
+{% block content %}  {# Start des content-Blocks, der in base.html definiert ist #}
+    <h1>Aktivitäten</h1>  {# Überschrift der Seite #}
+    {% if activities %}  {# Überprüfen, ob es Aktivitäten zum Anzeigen gibt #}
+        <ul>  {# Start einer ungeordneten Liste #}
+        {% for activity in activities %}  {# Start einer Schleife, die über alle Aktivitäten iteriert #}
+            <li>{{ activity }}</li>  {# Jede Aktivität wird in einem Listenpunkt dargestellt #}
+        {% endfor %}  {# Ende der Schleife #}
+        </ul>  {# Ende der ungeordneten Liste #}
+    {% else %}  {# Wenn es keine Aktivitäten gibt, wird dieser Teil ausgeführt #}
+        <p>Keine Aktivitäten gefunden.</p>  {# Anzeige einer Nachricht, dass keine Aktivitäten gefunden wurden #}
+    {% endif %}  {# Ende des if-Statements #}
+{% endblock %}  {# Ende des content-Blocks #}
