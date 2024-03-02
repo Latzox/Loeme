@@ -1,0 +1,13 @@
+{% extends "base.html" %} {# Erbt von der "base.html"-Vorlage. #} 
+{% block content %}  {# Beginnt den "content"-Block #}
+    <h1>Wetter & Aktivitäten</h1>
+    <h3>Hosted on Azure</h3>
+    <form method="POST">  {# Beginnt das Formular #}
+        <label for="city">Stadt eingeben:</label>  {# Label für das Eingabefeld #}
+        <input type="text" name="city" id="city" required>  {# Eingabefeld für die Stadt #}
+        <button type="submit">Suchen</button>  {# Schaltfläche zum Absenden des Formulars #}
+    </form>
+    {% if error %}  {# Überprüft, ob eine Fehlermeldung vorhanden ist. Wenn ja, wird sie angezeigt. #}
+        <p class="error">{{ error }}</p>  {# Zeigt die Fehlermeldung an. #}
+    {% endif %}
+{% endblock %}  {# Beendet den "content"-Block #}

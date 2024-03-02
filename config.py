@@ -1,0 +1,3 @@
+# Fügen Sie hier Ihre API-Keys ein
+WEATHER_API_KEY = "022f924197c84cffa7965031232804"
+GOOGLE_PLACES_API_KEY = "AIzaSyDCd-VzN3CqvaAx0omiMhfdLQ7zcZWUjoQ"
