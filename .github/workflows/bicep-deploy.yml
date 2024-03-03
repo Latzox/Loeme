@@ -1,0 +1,29 @@
+name: Bicep Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      imagetag:
+        type: string
+        description: Type imagetag to deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure Bicep Deploy
+      uses: Azure/arm-deploy@v2
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ./deploy/main.bicep
+        parameters: 'dockerImageNameTag=${{ github.event.inputs.imagetag }} appServiceName=loeme containerRegistryName=latzo acrResourceGroupName=Default'
+        failOnStdErr: false
