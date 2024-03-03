@@ -6,6 +6,9 @@ on:
       imagetag:
         type: string
         description: Type imagetag to deploy
+      azurelocation:
+        type: string
+        description: Type in the Azure Location for Deployment
 
 jobs:
   build:
@@ -18,6 +21,13 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Create Resource Group
+      uses: azure/CLI@v1.0.9
+      with:
+        azcliversion: 2.49.0
+        inlineScript: |
+          az group create --resource-group ${{ secrets.AZURE_RG }} --location ${{ github.event.inputs.azurelocation }}
 
     - name: Azure Bicep Deploy
       uses: Azure/arm-deploy@v2
