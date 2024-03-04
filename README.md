@@ -27,7 +27,7 @@ docker run -n web -p 80:80 latzo.azurecr.io/loeme:latest
 ### Python
 If you'd like to run the app in your local python environment, you can follow these steps:
 ```
-
+Todo
 ```
 
 
