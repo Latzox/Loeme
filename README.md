@@ -1,12 +1,35 @@
+[![Build and Push to ACR](https://github.com/Latzox/Loeme/actions/workflows/docker-build.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build.yml)
+[![Latest Bicep Deployment](https://github.com/Latzox/Loeme/actions/workflows/bicep-deploy.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/bicep-deploy.yml)
+
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Loeme is a web application written in html/css and python. You can search your city and get a 3-day weather forecast as well as informations about points of interests in that city and restaurants and hotels which are worth a look.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 1.	Installation process
 2.	Software dependencies
 3.	Latest releases
-4.	API references
+
+## Installation process
+### Docker
+You can pull the current docker image from Azure Container Registry. But you need to authenticate. Ask the developer for access.
+```
+docker login latzo.azurecr.io
+```
+Then you can pull the latest image
+```
+docker pull latzo.azurecr.io/loeme:latest
+```
+And run the application with:
+```
+docker run -n web -p 80:80 latzo.azurecr.io/loeme:latest
+```
+
+### Python
+If you'd like to run the app in your local python environment, you can follow these steps:
+```
+
+```
+
 
 # Build and Test
 TODO: Describe and show how to build your code and run the tests. 
