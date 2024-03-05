@@ -3,7 +3,7 @@
 |Staging|[![Build and Push to ACR (Staging)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml)|[![Deploy to Azure (Staging)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml)|[Staging on Azure](https://loeme-staging-app.azurewebsites.net)
 |Prod|[![Build and Push to ACR (Prod)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml)|[![Deploy to Azure (Prod)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml)|[Prod on Azure](https://loeme-prod-app.azurewebsites.net)
 
-# Loeme
+# Loeme (Test)
 
 Loeme is a Flask-based web application designed to enhance city exploration with real-time weather forecasts and personalized recommendations for activities, restaurants, and hotels. Leveraging the Weather API and Google Places API, it offers users a unique way to plan their city visits.
 
