@@ -5,7 +5,6 @@ from flask import Flask, render_template, request, redirect, url_for
 
 # Initialisierung der Flask App
 app = Flask(__name__)
-# app.secret_key = "test1234!"
 
 # Get API Keys from Env
 WEATHER_API_KEY = os.environ['WEATHER_API_KEY']
