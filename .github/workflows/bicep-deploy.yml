@@ -1,4 +1,4 @@
-name: Bicep Deploy
+name: Deploy to Azure
 
 on:
   workflow_dispatch:
