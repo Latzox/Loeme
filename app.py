@@ -1,11 +1,15 @@
 # Import von benötigten Modulen und APIs
 import requests
+import os
 from flask import Flask, render_template, request, redirect, url_for
-from config import WEATHER_API_KEY, GOOGLE_PLACES_API_KEY
 
 # Initialisierung der Flask App
 app = Flask(__name__)
-app.secret_key = "test1234!"
+# app.secret_key = "test1234!"
+
+# Get API Keys from Env
+WEATHER_API_KEY = os.environ['WEATHER_API_KEY']
+GOOGLE_PLACES_API_KEY = os.environ['GOOGLE_PLACES_API_KEY']
 
 # Routing für die Homepage
 @app.route('/', methods=['GET', 'POST'])
@@ -100,4 +104,4 @@ def fetch_google_places_data(city_name, query):
 
 # Start der App
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0', port=80)
+    app.run(debug=False,host='0.0.0.0', port=80)
