@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %} 
+{# Zeigt den Stadtnamen an, für den das Wetter und die Aktivitäten angezeigt werden sollen. #}
+    <h1>Wetter & Aktivitäten für {{ city }}</h1>  
+    <h2>Wettervorhersage</h2>
+    <ul class="weather-list">
+        {# Iteriert über jedes Element in der "weather_data"-Liste. Jedes Element repräsentiert einen Tag. #}
+        {% for day in weather_data %}  
+            <li>
+                {# Zeigt das Wetter-Icon für den Tag an. #}
+                <img src="{{ day.day.condition.icon }}" alt="{{ day.day.condition.text }}">
+                {# Zeigt das Datum, die Wetterbedingungen und die maximale Temperatur für den Tag an. #}  
+                {{ day.date }}: {{ day.day.condition.text }}, {{ day.day.maxtemp_c }}°C  
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <form method="POST"> 
+        <button type="submit" name="activities">Aktivitäten abrufen</button> 
+        <button type="submit" name="restaurants">Restaurants abrufen</button>
+        <button type="submit" name="hotels">Hotels abrufen</button>
+    </form>
+    
+    {# Überprüft, ob eine Aktivitäten-Liste vorhanden ist. Wenn ja, werden diese angezeigt. #}
+    {% if activities %} 
+        <h2>Aktivitäten</h2>
+        <ul class="activities-list">
+            {% for activity in activities %}
+                <li>
+                    <h3>{{ activity.name }}</h3>
+                    {% if 'photo_url' in activity %}
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ activity.place | replace(' ', '+') }}" target="_blank">
+                            <img src="{{ activity.photo_url }}" alt="{{ activity.name }}" width="200">
+                        </a>
+                    {% endif %}
+                    {% if 'address' in activity %}
+                        <p>Adresse: {{ activity.address }}</p>
+                    {% endif %}
+                    {% if 'rating' in activity %}
+                        <p>Bewertung: {{ activity.rating }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    {# Überprüft, ob eine Restaurant-Liste vorhanden ist. Wenn ja, werden diese angezeigt. #}
+    {% if restaurants %} 
+        <h2>Restaurants</h2>
+        <ul class="restaurants-list">
+            {% for restaurant in restaurants %}
+                <li>
+                    <h3>{{ restaurant.name }}</h3>
+                    {% if 'photo_url' in restaurant %}
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ restaurant.place | replace(' ', '+') }}" target="_blank">
+                            <img src="{{ restaurant.photo_url }}" alt="{{ restaurant.name }}" width="200">
+                        </a>
+                    {% endif %}
+                    {% if 'address' in restaurant %}
+                        <p>Adresse: {{ restaurant.address }}</p>
+                    {% endif %}
+                    {% if 'rating' in restaurant %}
+                        <p>Bewertung: {{ restaurant.rating }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    {# Überprüft, ob eine Hotel-Liste vorhanden ist. Wenn ja, werden diese angezeigt. #}
+    {% if hotels %} 
+        <h2>Hotels</h2>
+        <ul class="hotel-list">
+            {% for hotel in hotels %}
+                <li>
+                    <h3>{{ hotel.name }}</h3>
+                    {% if 'photo_url' in hotel %}
+                        <a href="https://www.google.com/maps/search/?api=1&query={{ hotel.place | replace(' ', '+') }}" target="_blank">
+                            <img src="{{ hotel.photo_url }}" alt="{{ hotel.name }}" width="200">
+                        </a>
+                    {% endif %}
+                    {% if 'address' in hotel %}
+                        <p>Adresse: {{ hotel.address }}</p>
+                    {% endif %}
+                    {% if 'rating' in hotel %}
+                        <p>Bewertung: {{ hotel.rating }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <br>
+    {# Link zur Startseite. #}
+    <a href="{{ url_for('index') }}">Zurück</a>  
+    {% endblock %}
