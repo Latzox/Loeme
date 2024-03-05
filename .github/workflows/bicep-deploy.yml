@@ -36,5 +36,10 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./deploy/main.bicep
-        parameters: 'dockerImageNameTag=${{ github.event.inputs.imagetag }} appServiceName=loeme containerRegistryName=latzo acrResourceGroupName=Default'
+        parameters: '
+          dockerImageNameTag=${{ github.event.inputs.imagetag }}
+          appServiceName=loeme containerRegistryName=latzo
+          acrResourceGroupName=Default
+          WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
         failOnStdErr: false
