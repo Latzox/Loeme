@@ -1,0 +1,39 @@
+name: Deploy to Azure (Prod)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Bicep-Deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Create Resource Group
+      uses: azure/CLI@v1.0.9
+      with:
+        azcliversion: 2.49.0
+        inlineScript: |
+          az group create --resource-group loeme-app-prod-rg --location switzerlandnorth
+
+    - name: Azure Bicep Deploy
+      uses: Azure/arm-deploy@v2
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: 'loeme-app-prod-rg'
+        template: ./deploy/main.bicep
+        parameters: '
+          dockerImageNameTag=loeme:latest
+          appServiceName=loeme-prod
+          containerRegistryName=latzo
+          acrResourceGroupName=Default
+          WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
+        failOnStdErr: false
