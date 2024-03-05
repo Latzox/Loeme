@@ -1,4 +1,4 @@
-name: Deploy to Azure
+name: Deploy to Azure (Staging)
 
 on:
   workflow_dispatch:
@@ -6,14 +6,11 @@ on:
       imagetag:
         type: string
         description: Type imagetag to deploy
-      azurelocation:
-        type: string
-        description: Type in the Azure Location for Deployment
 
 jobs:
   Bicep-Deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
     steps:
     - name: Checkout
       uses: actions/checkout@v4.1.1
@@ -28,13 +25,19 @@ jobs:
       with:
         azcliversion: 2.49.0
         inlineScript: |
-          az group create --resource-group ${{ secrets.AZURE_RG }} --location ${{ github.event.inputs.azurelocation }}
+          az group create --resource-group loeme-app-staging-rg --location switzerlandnorth
 
     - name: Azure Bicep Deploy
       uses: Azure/arm-deploy@v2
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ secrets.AZURE_RG }}
+        resourceGroupName: 'loeme-app-staging-rg'
         template: ./deploy/main.bicep
-        parameters: 'dockerImageNameTag=${{ github.event.inputs.imagetag }} appServiceName=loeme containerRegistryName=latzo acrResourceGroupName=Default'
+        parameters: '
+          dockerImageNameTag=${{ github.event.inputs.imagetag }}
+          appServiceName=loeme-staging
+          containerRegistryName=latzo
+          acrResourceGroupName=Default
+          WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
         failOnStdErr: false
