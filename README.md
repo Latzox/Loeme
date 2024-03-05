@@ -1,6 +1,7 @@
 [![Build and Push to ACR (Staging)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml)
 [![Build and Push to ACR (Prod)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml)
-[![Latest Bicep Deployment](https://github.com/Latzox/Loeme/actions/workflows/bicep-deploy.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/bicep-deploy.yml)
+[![Deploy to Azure (Staging)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml)
+[![Deploy to Azure (Prod)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml)
 
 # Introduction 
 Loeme is a web application written in html/css and python. You can search your city and get a 3-day weather forecast as well as informations about points of interests in that city and restaurants and hotels which are worth a look.
