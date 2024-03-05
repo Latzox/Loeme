@@ -1,4 +1,5 @@
-[![Build and Push to ACR](https://github.com/Latzox/Loeme/actions/workflows/docker-build.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build.yml)
+[![Build and Push to ACR (Staging)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml)
+[![Build and Push to ACR (Prod)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml)
 [![Latest Bicep Deployment](https://github.com/Latzox/Loeme/actions/workflows/bicep-deploy.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/bicep-deploy.yml)
 
 # Introduction 
