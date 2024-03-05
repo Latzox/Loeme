@@ -1,7 +1,7 @@
 |Environment|Build|Deployment|Demo|
 |:----------|:----|:---------|:---|
-|Staging|[![Build and Push to ACR (Staging)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml)|[![Deploy to Azure (Staging)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml)|[Staging on Azure](loeme-staging-app.azurewebsites.net)
-|Prod|[![Build and Push to ACR (Prod)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml)|[![Deploy to Azure (Prod)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml)|[Prod on Azure](loeme-prod-app.azurewebsites.net)
+|Staging|[![Build and Push to ACR (Staging)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-staging.yml)|[![Deploy to Azure (Staging)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-staging.yml)|[Staging on Azure](https://loeme-staging-app.azurewebsites.net)
+|Prod|[![Build and Push to ACR (Prod)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/docker-build-prod.yml)|[![Deploy to Azure (Prod)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml/badge.svg)](https://github.com/Latzox/Loeme/actions/workflows/azure-deploy-prod.yml)|[Prod on Azure](https://loeme-prod-app.azurewebsites.net)
 
 # Loeme
 
