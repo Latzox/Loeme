@@ -1,12 +1,12 @@
-param location string
-param appServiceName string
-param dockerImage string
+param location string = resourceGroup().location
+param appServiceName string = 'loeme-staging'
+param dockerImage string = 'latzo.azurecr.io/loeme:latest'
 
 @secure()
-param WEATHER_API_KEY string
+param WEATHER_API_KEY string = newGuid()
 
 @secure()
-param GOOGLE_PLACES_API_KEY string
+param GOOGLE_PLACES_API_KEY string = newGuid()
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2023-01-01' = {
   name: toLower('${appServiceName}-asp')
