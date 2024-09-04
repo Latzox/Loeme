@@ -10,7 +10,7 @@ param WEATHER_API_KEY string
 @secure()
 param GOOGLE_PLACES_API_KEY string
 
-var dockerImage = '${containerRegistryName}.azurecr.io/${dockerImageNameTag}'
+var dockerImage = '${containerRegistryName}.azurecr.io/loeme:${dockerImageNameTag}'
 
 module appService 'appservice.bicep' = {
   name: '${appServiceName}-app'  
