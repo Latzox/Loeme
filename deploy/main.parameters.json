@@ -14,9 +14,6 @@
     "dockerImageNameTag": {
       "value": "latest"
     },
-    "acrResourceGroupName": {
-      "value": "rg-acr-prod-001"
-    },
     "WEATHER_API_KEY": {
       "value": "Dummy"
     },

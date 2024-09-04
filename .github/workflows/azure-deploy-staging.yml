@@ -54,7 +54,6 @@ jobs:
           dockerImageNameTag=${{ github.event.inputs.imagetag }}
           appServiceName=loeme-staging
           containerRegistryName=latzo
-          acrResourceGroupName=rg-acr-prod-001
           WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
           GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
         deploymentMode: Validate
@@ -82,7 +81,6 @@ jobs:
           dockerImageNameTag=${{ github.event.inputs.imagetag }}
           appServiceName=loeme-staging
           containerRegistryName=latzo
-          acrResourceGroupName=rg-acr-prod-001
           WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
           GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
         additionalArguments: --what-if
@@ -128,7 +126,6 @@ jobs:
           dockerImageNameTag=${{ github.event.inputs.imagetag }}
           appServiceName=loeme-staging
           containerRegistryName=latzo
-          acrResourceGroupName=rg-acr-prod-001
           WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
           GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
         failOnStdErr: false
