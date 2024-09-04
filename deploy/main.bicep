@@ -1,8 +1,8 @@
 param location string = resourceGroup().location
-param appServiceName string
-param containerRegistryName string
-param dockerImageNameTag string
-param acrResourceGroupName string
+param appServiceName string = 'loeme-staging'
+param containerRegistryName string = 'latzo'
+param dockerImageNameTag string = 'latest'
+param acrResourceGroupName string = 'rg-acr-prod-001'
 
 @secure()
 param WEATHER_API_KEY string
