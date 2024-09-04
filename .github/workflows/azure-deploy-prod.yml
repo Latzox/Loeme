@@ -120,7 +120,7 @@ jobs:
         resourceGroupName: 'rg-loeme-prod-001'
         template: ./deploy/main.bicep
         parameters: '
-          dockerImageNameTag=${{ github.event.inputs.imagetag }}
+          dockerImageNameTag=latest
           appServiceName=loeme-prod
           containerRegistryName=latzo
           WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
