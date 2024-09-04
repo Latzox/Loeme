@@ -2,7 +2,6 @@ param location string = resourceGroup().location
 param appServiceName string = 'loeme-staging'
 param containerRegistryName string = 'latzo'
 param dockerImageNameTag string = 'latest'
-param acrResourceGroupName string = 'rg-acr-prod-001'
 
 @secure()
 param WEATHER_API_KEY string = newGuid()
@@ -20,14 +19,5 @@ module appService 'appservice.bicep' = {
     appServiceName: appServiceName    
     location:   location
     dockerImage: dockerImage
-  }
-}
-
-module roleAssignment 'roleassignment.bicep' = {
-  name: '${appServiceName}-roleassignment'  
-  scope: resourceGroup(acrResourceGroupName)
-  params: {
-    appServicePrincipalId: appService.outputs.principalId
-    containerRegistryName: containerRegistryName
   }
 }
