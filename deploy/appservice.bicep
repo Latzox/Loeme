@@ -24,14 +24,10 @@ resource appService 'Microsoft.Web/sites@2023-01-01' = {
   name: '${appServiceName}-app'
   location: location
   kind: 'app,linux,container'
-  identity: {
-    type: 'SystemAssigned'
-  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
       linuxFxVersion: 'DOCKER|${dockerImage}'
-      acrUseManagedIdentityCreds: true
       appSettings: [
         {
           name: 'WEATHER_API_KEY'
