@@ -12,6 +12,11 @@ jobs:
   Prerequisites:
     runs-on: ubuntu-latest
     steps:
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
     - name: Create Resource Group
       uses: azure/CLI@v1.0.9
       with:
@@ -21,6 +26,7 @@ jobs:
 
   Lint:
     runs-on: ubuntu-latest
+    needs: Prerequisites
     steps:
     - uses: actions/checkout@v3
     - name: 'Lint Bicep template'
@@ -28,6 +34,7 @@ jobs:
 
   Validate:
     runs-on: ubuntu-latest
+    needs: Prerequisites
     steps:
     - name: Checkout
       uses: actions/checkout@v4.1.1
