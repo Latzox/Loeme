@@ -8,8 +8,106 @@ on:
         description: Type imagetag to deploy
 
 jobs:
-  Bicep-Deploy:
+
+  Prerequisites:
     runs-on: ubuntu-latest
+    steps:
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Create Resource Group
+      uses: azure/CLI@v1.0.9
+      with:
+        azcliversion: 2.49.0
+        inlineScript: |
+          az group create --resource-group rg-loeme-staging-001 --location switzerlandnorth
+
+  Lint:
+    runs-on: ubuntu-latest
+    needs: Prerequisites
+    steps:
+    - uses: actions/checkout@v3
+    - name: 'Lint Bicep template'
+      run: az bicep build --file ./deploy/main.bicep
+
+  Validate:
+    runs-on: ubuntu-latest
+    needs: Prerequisites
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Run preflight validation
+      uses: Azure/arm-deploy@v2
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: 'rg-loeme-staging-001'
+        template: ./deploy/main.bicep
+        parameters: '
+          dockerImageNameTag=${{ github.event.inputs.imagetag }}
+          appServiceName=loeme-staging
+          containerRegistryName=latzo
+          acrResourceGroupName=rg-acr-prod-001
+          WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
+        deploymentMode: Validate
+        failOnStdErr: false
+
+  Preview:
+    runs-on: ubuntu-latest
+    needs: [Lint, Validate]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Run what-if
+      uses: Azure/arm-deploy@v2
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: 'rg-loeme-staging-001'
+        template: ./deploy/main.bicep
+        parameters: '
+          dockerImageNameTag=${{ github.event.inputs.imagetag }}
+          appServiceName=loeme-staging
+          containerRegistryName=latzo
+          acrResourceGroupName=rg-acr-prod-001
+          WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
+          GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
+        additionalArguments: --what-if
+        failOnStdErr: false
+
+  PSRule:
+    runs-on: ubuntu-latest
+    needs: [Lint, Validate]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Test Azure Well-Architected Framework (PSRule)
+      uses: Microsoft/ps-rule@v2.9.0
+      with:
+        modules: PSRule.Rules.Azure
+
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: Preview
     environment: staging
     steps:
     - name: Checkout
@@ -20,24 +118,17 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Create Resource Group
-      uses: azure/CLI@v1.0.9
-      with:
-        azcliversion: 2.49.0
-        inlineScript: |
-          az group create --resource-group loeme-app-staging-rg --location switzerlandnorth
-
-    - name: Azure Bicep Deploy
+    - name: Deploy Loeme App
       uses: Azure/arm-deploy@v2
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: 'loeme-app-staging-rg'
+        resourceGroupName: 'rg-loeme-staging-001'
         template: ./deploy/main.bicep
         parameters: '
           dockerImageNameTag=${{ github.event.inputs.imagetag }}
           appServiceName=loeme-staging
           containerRegistryName=latzo
-          acrResourceGroupName=Default
+          acrResourceGroupName=rg-acr-prod-001
           WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}
           GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}'
         failOnStdErr: false

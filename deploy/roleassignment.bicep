@@ -1,5 +1,5 @@
-param containerRegistryName string
-param appServicePrincipalId string
+param containerRegistryName string = 'latzo'
+param appServicePrincipalId string = 'Dummy'
 
 // Existing container registry reference
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
