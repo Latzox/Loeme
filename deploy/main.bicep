@@ -5,10 +5,10 @@ param dockerImageNameTag string = 'latest'
 param acrResourceGroupName string = 'rg-acr-prod-001'
 
 @secure()
-param WEATHER_API_KEY string
+param WEATHER_API_KEY string = newGuid()
 
 @secure()
-param GOOGLE_PLACES_API_KEY string
+param GOOGLE_PLACES_API_KEY string = newGuid()
 
 var dockerImage = '${containerRegistryName}.azurecr.io/loeme:${dockerImageNameTag}'
 
